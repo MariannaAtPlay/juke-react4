@@ -1,5 +1,5 @@
 import React from 'react';
-impor SET_LYRICS from './constants.js';
+import SET_LYRICS from '../constants';
 
 
 // function reducer(prevState, action) {
@@ -8,7 +8,7 @@ impor SET_LYRICS from './constants.js';
 
 const initialState = { text: '' };
 
-export default function reducer(state = initialState, action) {
+export default function reducer (state = initialState, action) {
   
   switch(action.type) {
 
