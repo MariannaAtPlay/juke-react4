@@ -92,9 +92,13 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _lyrics = __webpack_require__(299);
+	var _lyrics = __webpack_require__(300);
 	
 	var _lyrics2 = _interopRequireDefault(_lyrics);
+	
+	var _LyricsContainer = __webpack_require__(301);
+	
+	var _LyricsContainer2 = _interopRequireDefault(_LyricsContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -130,6 +134,7 @@
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/new-playlist', component: _NewPlaylistContainer2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'playlists/:playlistId', component: _Playlist2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/lyrics', component: _LyricsContainer2.default }),
 	    _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/albums' })
 	  )
 	), document.getElementById('app'));
@@ -28735,6 +28740,19 @@
 	        )
 	      )
 	    ),
+	    _react2.default.createElement(
+	      'section',
+	      null,
+	      _react2.default.createElement(
+	        'h4',
+	        { className: 'menu-item' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/lyrics' },
+	          'LYRICS'
+	        )
+	      )
+	    ),
 	    _react2.default.createElement('hr', null),
 	    _react2.default.createElement(
 	      'section',
@@ -30673,7 +30691,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _constants = __webpack_require__(300);
+	var _constants = __webpack_require__(299);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -30703,6 +30721,17 @@
 
 /***/ },
 /* 299 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var SET_LYRICS = exports.SET_LYRICS = 'SET_LYRICS';
+
+/***/ },
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30711,7 +30740,7 @@
 	  value: true
 	});
 	
-	var _constants = __webpack_require__(300);
+	var _constants = __webpack_require__(299);
 	
 	var setLyrics = function setLyrics(text) {
 	
@@ -30724,15 +30753,121 @@
 	exports.default = setLyrics;
 
 /***/ },
-/* 300 */
-/***/ function(module, exports) {
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	var SET_LYRICS = exports.SET_LYRICS = 'SET_LYRICS';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _store = __webpack_require__(276);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _Lyrics = __webpack_require__(302);
+	
+	var _Lyrics2 = _interopRequireDefault(_Lyrics);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	//import setLyrics from './action-creators/lyrics';
+	
+	var LyricsContainer = function (_React$Component) {
+	    _inherits(LyricsContainer, _React$Component);
+	
+	    function LyricsContainer(props) {
+	        _classCallCheck(this, LyricsContainer);
+	
+	        var _this = _possibleConstructorReturn(this, (LyricsContainer.__proto__ || Object.getPrototypeOf(LyricsContainer)).call(this, props));
+	
+	        _this.state = _store2.default.getState();
+	        return _this;
+	    }
+	
+	    _createClass(LyricsContainer, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.unsubscribe = _store2.default.subscribe(function () {
+	                this.setState(_store2.default.getState());
+	            });
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.unsubscribe();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(_Lyrics2.default, null);
+	        }
+	    }]);
+	
+	    return LyricsContainer;
+	}(_react2.default.Component);
+	
+	exports.default = LyricsContainer;
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Lyrics = function Lyrics(props) {
+	    return _react2.default.createElement(
+	        'form',
+	        { className: 'form-group', style: { marginTop: '20px' } },
+	        _react2.default.createElement('input', {
+	            className: 'form-control',
+	            placeholder: 'Enter artist name'
+	        }),
+	        _react2.default.createElement('input', {
+	            className: 'form-control',
+	            placeholder: 'Enter song name'
+	        }),
+	        _react2.default.createElement(
+	            'pre',
+	            null,
+	            'SOME EXISTING LYRICS'
+	        ),
+	        _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-primary btn-block' },
+	            'Search'
+	        )
+	    );
+	};
+	
+	exports.default = Lyrics;
+	
+	/*             onChange={}
+	            value={}
+	            */
 
 /***/ }
 /******/ ]);
